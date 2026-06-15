@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikki Kolk</title>
+    <meta name="description" content="fashion designer">
+
+    <link rel="icon" href="sd32.png" sizes="32x32" type="image/png">
+    <link rel="icon" type="image/png" sizes="96x96" href="sd96.png">
+    <link rel="apple-touch-icon" href="sd180.png" sizes="180x180">
+
+    <meta property="og:title" content="Nikki Kolk">
+    <meta property="og:description" content="fashion designer">
+    <meta property="og:image" content="sd180.png">
+    <meta property="og:url" content="http://nikkikolk.com">
+    <meta property="og:type" content="website">
+
+
+
+    <link rel="stylesheet" href="nikki.css">
+</head>
+
+<style>
+    a {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 100svh;
+        width: 100vw;
+
+    }
+
+    #mid {
+        height: 50svh;
+        width: 50vw;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        cursor: pointer;
+
+
+
+        transition: transform 0.2s ease-in-out;
+
+    }
+
+    #mid:hover {
+        transform: scale(1.05);
+
+
+    }
+
+    #a {
+        cursor: pointer;
+    }
+
+
+    #bottom {
+        position: absolute;
+        bottom: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.1s ease-in-out;
+    }
+
+
+
+    #bottom p {
+        padding: 2vw;
+    }
+
+    #copynot {
+        position: absolute;
+        margin-bottom: 5vw;
+        display: none;
+        cursor: pointer;
+    }
+
+    .big {
+        font-size: 3.5vw;
+    }
+
+
+
+
+
+
+
+    @media (max-width: 600px) {
+
+        #mid {
+            width: 100vw;
+            height: 100svh;
+        }
+
+        p {
+            font-size: 4vw;
+
+        }
+
+        #mid:hover {
+            transform: scale(1);
+        }
+
+
+
+        #bottom {
+            margin: 3vw;
+        }
+
+        .big {
+            font-size: 12vw;
+        }
+
+        #copynot {
+
+            position: fixed;
+            margin-bottom: 16vw;
+            display: none;
+        }
+    }
+</style>
+
+<body>
+    <a id="curs" href="fashion.html">
+        <div id="mid">
+            <p id="name" class="bold big"></p>
+            <p id="bio"></p>
+        </div>
+    </a>
+
+    <div id="bottom">
+        <p id="copynot">copied!</p>
+        <p id="email">nikkikolk@icloud.com</p>
+    </div>
+
+</body>
+
+<script>
+
+    //type
+    function typeText(element, text, speed = 100, callback) {
+        let i = 0;
+        function typing() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(typing, speed);
+            } else {
+                if (callback) callback(); // call next typing only once
+            }
+        }
+        typing();
+    }
+
+    window.addEventListener("load", () => {
+        const nameElement = document.getElementById("name");
+        const bioElement = document.getElementById("bio");
+
+        typeText(nameElement, "Nikki Kolk", 100, () => {
+            typeText(bioElement, "Fashion Designer and Creative", 60);
+        });
+    });
+
+
+
+    //EMAIL
+    const emailElement = document.getElementById("email");
+
+    emailElement.addEventListener("click", () => {
+        const email = emailElement.textContent.trim();
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            // Modern browsers
+            navigator.clipboard.writeText(email)
+                .then(() => showCopied(email))
+                .catch(err => console.error("Clipboard error:", err));
+        } else {
+            // Fallback for older browsers or restricted contexts
+            const textarea = document.createElement("textarea");
+            textarea.value = email;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand("copy");
+                showCopied(email);
+            } catch (err) {
+                console.error("Fallback copy failed:", err);
+            }
+            document.body.removeChild(textarea);
+        }
+    });
+
+    const copynot = document.getElementById("copynot");
+
+    function showCopied(original) {
+
+        copynot.style.display = "block";
+        setTimeout(() => {
+            copynot.style.display = "none";
+
+        }, 1000);
+    }
+
+</script>
+
+</html>

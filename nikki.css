@@ -1,0 +1,50 @@
+ @font-face {
+     font-family: 'creato-light';
+     src: url('creato_display/CreatoDisplay-Light.otf') format('opentype');
+     font-weight: normal;
+     font-style: normal;
+ }
+
+ @font-face {
+     font-family: 'creato-bold';
+     src: url('creato_display/CreatoDisplay-Bold.otf') format('opentype');
+     font-weight: normal;
+     font-style: normal;
+ }
+
+ .bold {
+     font-family: "creato-bold";
+
+ }
+
+ .big {
+     font-size: 3vw;
+ }
+
+ a {
+     color: black;
+     text-decoration: none;
+ }
+
+ body {
+     background-color: white;
+
+     transition: background-color 0.6s ease-in-out;
+ }
+
+ body,
+ html,
+ p {
+     margin: 0;
+     padding: 0;
+
+     font-family: 'creato-light';
+ }
+
+ @media (max-width: 600px) {
+     .big {
+         font-size: 8vw;
+     }
+
+   
+ }

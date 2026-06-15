@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikki Kolk</title>
+
+
+
+    <link rel="stylesheet" href="nikki.css">
+
+</head>
+
+<style>
+    p,
+    a {
+        font-size: 1.2vw;
+        transition: color 0.6s ease-in-out;
+    }
+
+    .clickable {
+        cursor: pointer;
+    }
+
+    #right {
+
+        position: absolute;
+        right: 0;
+        width: 75%;
+        height: 100%;
+        /* background-color: rgb(254, 171, 255); */
+
+
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+
+        overflow-y: scroll;
+    }
+
+    #rightwidth {
+        margin-top: 1vw;
+        width: 90%;
+
+        display: flex;
+        /* background-color: blueviolet; */
+    }
+
+    #righttext {
+        margin-bottom: 2vw;
+        white-space: normal;
+
+        overflow-wrap: break-word;
+        /* break long words if needed */
+        word-break: break-word;
+
+    }
+
+    #right img {
+        width: 10vw;
+    }
+
+    #rightfill {}
+
+    #images {
+        width: 100%;
+
+        display: grid;
+
+        gap: 2vw;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    #images img {
+        width: 100%;
+        height: 70svh;
+        object-fit: cover;
+
+        opacity: 0;
+        transition: filter 0.3s ease, opacity 0.3s ease;
+
+    }
+
+    #images img.loaded {
+        opacity: 1;
+
+    }
+
+    #left {
+        position: absolute;
+        width: 25%;
+        height: 100%;
+        /* background-color: aqua; */
+
+        overflow-y: auto;
+
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+
+
+    }
+
+    #leftwidth {
+        width: 80%;
+
+
+    }
+
+    #posts {
+
+
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        text-align: left;
+
+        flex-direction: column;
+    }
+
+    #posts div {
+        margin-top: 1vw;
+    }
+
+    #left p {}
+
+
+
+
+    #left img {
+        width: 100%;
+        height: 30vw;
+
+        object-fit: cover;
+        transform-origin: center center;
+
+        transition: transform 0.3s ease, opacity 0.2s ease-in-out;
+
+
+    }
+
+    #left img.active-post {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+
+    #left img:hover {
+        opacity: 0.9;
+    }
+
+    #top {
+        margin-top: 1vw;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    #top a {
+        margin-top: 0.5vw;
+
+    }
+
+    #info {
+        display: none;
+
+
+
+        cursor: pointer;
+    }
+
+    #info img {
+        margin-top: 1vw;
+        width: 100%;
+        height: 25vw;
+    }
+
+    #switch {
+        width: auto;
+        position: absolute;
+        right: 4vw;
+        top: 0vw;
+        margin: 0;
+
+        z-index: 20;
+
+        font-size: 4vw;
+
+        transition: transform 0.2s ease-in-out;
+    }
+
+    #switch:hover {
+        transform: scale(1.05);
+    }
+
+
+
+    #linkdiv {}
+
+    @media (max-width: 600px) {
+
+
+        #left img.active-post {
+            transform: scale(1.05);
+            /* zoom in 10% */
+        }
+
+        p {
+            font-size: 4vw;
+
+        }
+
+        .big {
+            font-size: 8vw;
+        }
+
+
+
+        #left {
+            position: absolute;
+            width: 30%;
+            height: 90%;
+
+            bottom: 0;
+
+            overflow-x: scroll;
+            overflow-y: auto;
+
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            flex-direction: column;
+
+
+        }
+
+        #leftwidth {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            width: auto;
+            height: 100%;
+        }
+
+
+
+        #posts {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            justify-content: start;
+            align-items: center;
+
+
+            flex-direction: column;
+
+            margin-left: 0;
+
+
+
+        }
+
+        #posts div {
+
+
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+
+            flex-direction: column;
+
+
+            height: 90vw;
+            width: auto;
+
+
+
+
+        }
+
+        #posts p {
+            font-size: 0;
+            z-index: 2;
+            width: auto;
+            height: auto;
+        }
+
+
+
+        #left img {
+            position: absolute;
+            width: 70%;
+            height: 40vw;
+
+
+            object-fit: cover;
+        }
+
+        #linkdiv {
+
+
+            position: relative;
+            display: flex;
+
+            justify-content: center;
+            align-items: end;
+        }
+
+        /* #top p {
+            margin: 2vw;
+        }
+
+        a {
+            margin: 2vw;
+        } */
+
+        #top {
+            /* background-color: aquamarine; */
+            position: fixed;
+            width: 100vw;
+            top: 0;
+            left: 0;
+            height: 10%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 0;
+
+
+
+
+        }
+
+
+        #top p {}
+
+        #ig {}
+
+
+        #right {
+
+            position: absolute;
+            right: 0;
+            top: 10%;
+            width: 70%;
+            height: 90%;
+
+
+
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            flex-direction: column;
+
+            overflow-y: scroll;
+        }
+
+        #rightwidth {
+            margin-top: 0vw;
+            width: 90%;
+
+        }
+
+        #switch {
+            position: absolute;
+
+            display: none;
+            width: auto;
+
+            font-size: 8vw;
+
+            right: 5vw;
+            top: 0;
+
+        }
+
+        #images {
+            width: auto;
+            gap: 2vw;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        #images img {
+            height: 40svh;
+        }
+
+        p,
+        a {
+            font-size: 4vw;
+
+        }
+
+        #infoimg {
+
+
+            display: none;
+        }
+
+        #info {}
+
+    }
+</style>
+
+<body>
+
+
+
+    <div id="left">
+        <div id="leftwidth">
+            <div id="top">
+
+                <p onclick="info()" class="bold clickable big">Nikki Kolk</p>
+
+
+
+                <p onclick="info()">About</p>
+                <a href="CV NIKKI KOLK.pdf" target="_blank">CV</a>
+
+                <a id="ig" href="https://www.instagram.com/nikkikolk/" target="_blank">
+                    Instagram
+                </a>
+
+
+
+
+            </div>
+
+
+            <div id="posts" onclick="back()" class="clickable">
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="right">
+        <div id="rightwidth">
+            <div id="info">
+                <p class="big bold">About me</p>
+                <!-- <p class="big bold">Nikki Kolk</p> -->
+                <p>Nikki Kolk, a fashion designer and creative based in Amsterdam. <br>
+                    My work explores the intersection of traditional tailoring and modern expression. <br><br>
+                    Born in 2005, I’ve been designing and creating garments from a young age. I studied Fashion
+                    Tailoring at ROC Amsterdam Zuid, where I developed a strong technical foundation in design, pattern
+                    construction and garment creation.<br><br>
+                    I gained professional experience at Katharina Spitz and House of Denim Foundation, where I expanded
+                    my understanding of design processes and garment making. I’m currently part of the House of Denim
+                    Incubator Program, where I continue to focus on my practice while developing my own label, Nikki
+                    Kolk. I aim to create timeless, expressive pieces that show craftsmanship.
+
+                </p>
+                <!-- <img id="infoimg"
+                    src="https://scontent.cdninstagram.com/v/t51.82787-15/571711676_18387402718134998_5369752842998367666_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=Mzc1MDYyMDM1MDIzMzc2MTM5Ng%3D%3D.3-ccb1-7&ccb=1-7&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjcyMHg1NDAuc2RyLkMzIn0%3D&_nc_ohc=al0yCKaorG0Q7kNvwG3LlP5&_nc_oc=Adl6Ph3t6a1S6pRDynIgQIhlRnPbibHU2BoKNC5B0agqvlbV-F4cFvj6xraeDTyGGEI&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=XCGQpeBTsPreadKO8TDfvw&oh=00_Afhcuy2hbsd5L5TjNQD3KrrZYg8UECzrGFzDM2atoN_VbQ&oe=6912C815"
+                    alt=""> -->
+                <!-- <br><br><br><br>
+                <img src="nik.png" alt=""> -->
+            </div>
+
+            <div id="rightfill">
+                <div id="righttext">
+                    <p id="head" class="big bold"></p>
+                    <p id="description">
+                    </p>
+                </div>
+
+                <div id="images">
+
+
+                </div>
+            </div>
+            <p onclick="switchbg()" id="switch" class="clickable">☼</p>
+        </div>
+
+
+    </div>
+
+</body>
+
+<script>
+
+
+
+    const rightfill = document.getElementById("rightfill");
+    const infodiv = document.getElementById("info");
+
+    function info() {
+
+        if (infodiv.style.display !== 'block') {
+            infodiv.style.display = 'block';
+            rightfill.style.display = 'none';
+        } else {
+            infodiv.style.display = 'none';
+            rightfill.style.display = 'block';
+
+        }
+
+    }
+
+    function back() {
+
+        infodiv.style.display = 'none';
+        rightfill.style.display = 'block';
+
+    }
+
+    function infotoggle() {
+
+    }
+
+    function switchbg() {
+        const body = document.body;
+        const links = document.querySelectorAll("a");
+        const sw = document.getElementById("switch");
+
+        if (body.style.backgroundColor === "black") {
+            // Switch to light mode
+            body.style.backgroundColor = "white";
+            body.style.color = "black";
+            links.forEach(link => link.style.color = "black");
+
+            sw.textContent = '☼';
+            sw.style.fontSize = '';
+
+        } else {
+            // Switch to dark mode
+            body.style.backgroundColor = "black";
+            body.style.color = "white";
+            links.forEach(link => link.style.color = "white");
+            sw.textContent = '☾';
+
+
+        }
+    }
+
+    //CALL FOR FOLDER 
+
+    async function getFolderData(folderName) {
+        try {
+            const response = await fetch(`get.php?folder=${encodeURIComponent(folderName)}`);
+            const data = await response.json();
+
+            if (data.error) {
+                console.error(data.error);
+                return;
+            }
+
+            const postsDiv = document.getElementById('posts');
+            const post = document.createElement('div');
+
+            // Scroll animation
+            function scrolldown() {
+                const left = document.getElementById("left");
+                if (!left) return;
+
+                setTimeout(() => {
+                    const start = left.scrollTop;
+                    const end = 80; // target scroll position
+                    const duration = 1000; // 1 second
+                    const startTime = performance.now();
+
+                    function animateScroll(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1); // 0 to 1
+                        const ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+                        left.scrollTop = start + (end - start) * ease;
+
+                        if (progress < 1) requestAnimationFrame(animateScroll);
+                    }
+
+                    requestAnimationFrame(animateScroll);
+                }, 1200);
+            }
+
+            scrolldown();
+
+            // Set folder metadata
+            post.dataset.folder = folderName;
+
+            // Inner content: head and first image
+            post.innerHTML = `
+            <p class="bold">${data.head ? data.head : 'No head.txt found'}</p>
+            ${data.images && data.images.length > 0 ? `<img src="${data.images[0]}" alt="">` : ''}
+        `;
+
+            // Append post to container
+            postsDiv.appendChild(post);
+
+            // Setup click listeners safely
+            setupPostClickListeners();
+
+        } catch (err) {
+            console.error("Error loading folder:", folderName, err);
+        }
+    }
+
+
+    async function loadAllFolders(maxFolder) {
+        for (let i = maxFolder; i >= 1; i--) {
+            await getFolderData(i.toString());
+        }
+
+        // Auto-click the highest folder (first one) after loading all
+        const defaultPost = document.querySelector(`div[data-folder='${maxFolder}']`);
+        if (defaultPost) defaultPost.click();
+    }
+
+    async function findHighestFolder() {
+        let folder = 1;
+
+        while (true) {
+            try {
+                const response = await fetch(`get.php?folder=${folder}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    console.log("Highest folder found:", folder - 1);
+
+                    // Load all folders from highest to 1
+                    await loadAllFolders(folder - 1);
+                    return;
+                }
+
+                folder++;
+            } catch (err) {
+                console.error("Error fetching folder:", folder, err);
+                return;
+            }
+        }
+    }
+
+    findHighestFolder();
+
+
+
+
+
+    function setupPostClickListeners() {
+        const posts = document.querySelectorAll('#posts > div');
+        let isLoading = false; // click lock
+
+        posts.forEach(post => {
+            // Only attach listener if not already attached
+            if (!post.dataset.listenerAttached) {
+                post.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+
+                    if (isLoading) return; // prevent spam clicks
+                    isLoading = true;
+
+                    const folderName = post.dataset.folder;
+                    console.log("Clicked folder:", folderName);
+
+                    // Remove active class from all post images
+                    posts.forEach(p => {
+                        p.querySelectorAll('img').forEach(img => img.classList.remove('active-post'));
+                    });
+
+                    // Add active class to clicked post images
+                    post.querySelectorAll('img').forEach(img => img.classList.add('active-post'));
+
+                    try {
+                        const response = await fetch(`get.php?folder=${encodeURIComponent(folderName)}`);
+                        const data = await response.json();
+
+                        if (data.error) {
+                            console.error(data.error);
+                            return;
+                        }
+
+                        document.getElementById('rightfill').scrollTo({ top: 0, behavior: 'smooth' });
+
+                        if (data.head) document.getElementById("head").textContent = data.head;
+                        if (data.description) document.getElementById("description").textContent = data.description;
+
+                        const imagesDiv = document.getElementById('images');
+                        imagesDiv.innerHTML = '';
+
+                        if (data.images && data.images.length > 0) {
+                            const refreshToken = Date.now(); // single token for this fetch
+                            data.images.forEach(imgName => {
+                                const imgEl = document.createElement('img');
+                                imgEl.src = imgName + '?_r=' + refreshToken;
+                                imgEl.onload = () => imgEl.classList.add('loaded');
+                                imagesDiv.appendChild(imgEl);
+                            });
+                        }
+
+                        back();
+                    } catch (error) {
+                        console.error("Error loading folder:", error);
+                    } finally {
+                        isLoading = false; // unlock click after done
+                    }
+                });
+
+                // mark listener as attached
+                post.dataset.listenerAttached = "true";
+            }
+        });
+
+        // auto-click default post
+        const defaultPost = document.querySelector("div[data-folder='" + folderamount + "']");
+        if (defaultPost) defaultPost.click();
+    }
+
+
+
+    document.querySelectorAll("img").forEach(img => {
+        const url = new URL(img.src);
+        url.searchParams.set('t', Date.now());
+        img.src = url.toString();
+    });
+
+
+</script>
+
+</html>
